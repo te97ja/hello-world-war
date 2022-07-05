@@ -5,7 +5,14 @@ pipeline {
       {
         steps{
           script {
-                    properties([ parameters([ choice( choices: ['choice1', 'choice2'])])])
+                    properties([
+                      parameters([
+                        choice(
+                          choices: ['choice1', 'choice2']
+                          name : 'parameters'
+                        )
+                      ])
+                    ])
 
           }
         }
