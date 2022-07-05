@@ -19,6 +19,7 @@ pipeline {
       }
         stage('clone step') {
             steps {
+                sh 'rm -rf hello-world-war'
                 sh 'git clone https://github.com/te97ja/hello-world-war.git'
             }
         }
