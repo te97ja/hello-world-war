@@ -1,6 +1,6 @@
 pipeline {
-  properties([ parameters([ choice( choices: ['choice1', 'choice2'])])])
   agent { label 'slave' }
+    properties([ parameters([ choice( choices: ['choice1', 'choice2'])])])
     stages {
         stage('clone step') {
             steps {
