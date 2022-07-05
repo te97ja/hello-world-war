@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'slave' }
+  agent { label '${params.slaves}' }
     stages {
       stage ('setting up parameters')
       {
@@ -8,8 +8,8 @@ pipeline {
                     properties([
                       parameters([
                         choice(
-                          choices: ['choice1', 'choice2'] ,
-                          name : 'parameters'
+                          choices: ['slave', 'slave2'] ,
+                          name : 'slaves'
                         )
                       ])
                     ])
