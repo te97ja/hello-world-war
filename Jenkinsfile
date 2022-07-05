@@ -1,4 +1,5 @@
 pipeline {
+          agent { label ${slaves} }
   stages {
       stage ('setting up parameters')
       {
@@ -16,7 +17,6 @@ pipeline {
           }
         }
       }
-        agent { label ${slaves} }
         stage('clone step') {
             steps {
                 sh 'rm -rf hello-world-war'
