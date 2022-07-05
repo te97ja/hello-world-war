@@ -1,7 +1,15 @@
 pipeline {
   agent { label 'slave' }
     stages {
-          properties([ parameters([ choice( choices: ['choice1', 'choice2'])])])
+      stage ('setting up parameters')
+      {
+        steps{
+          script {
+                    properties([ parameters([ choice( choices: ['choice1', 'choice2'])])])
+
+          }
+        }
+      }
         stage('clone step') {
             steps {
                 sh 'git clone https://github.com/te97ja/hello-world-war.git'
