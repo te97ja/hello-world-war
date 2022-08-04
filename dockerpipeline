@@ -7,6 +7,7 @@ pipeline {
           cd /home/ubuntu/multi
           git clone https://github.com/te97ja/hello-world-war.git
           }
+          }
       }
       
       stage('docker build') {
