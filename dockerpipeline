@@ -17,7 +17,7 @@ pipeline {
       stage('deploy') {
             steps {
                 sh 'sudo docker pull te97ja/dockermulti:latest'
-                sh 'sudo docker run -d te97ja/dockermulti:latest'
+                sh 'sudo docker run -d -p 8085:8085 te97ja/dockermulti:latest'
                 
             }
         }
