@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+    stages {
+      stage('docker build') {
+            steps {
+                cd /home/ubuntu/multi
+                docker build -t multistage .
+            }
+        }
+      stage('publish') {
+            steps {
+                docker tag 
+            }
+        }
+      stage('deploy') {
+            steps {
+                
+                
+            }
+        }
+    }
+}
