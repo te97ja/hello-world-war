@@ -5,19 +5,19 @@ pipeline {
       stage('docker build') {
             steps {
                 sh 'cd /home/ubuntu/multi/hello-world-war'
-                sh 'docker build -t dockermultistage .'
+                sh 'sudo docker build -t dockermultistage .'
             }
         }
       stage('publish') {
             steps {
-                sh 'docker tag dockermultistage:latest te97ja/dockermulti:latest'
-                sh 'docker push te97ja/dockermulti:latest'
+                sh 'sudo docker tag dockermultistage:latest te97ja/dockermulti:latest'
+                sh 'sudo docker push te97ja/dockermulti:latest'
             }
         }
       stage('deploy') {
             steps {
-                sh 'docker pull te97ja/dockermulti:latest'
-                sh 'docker run -d te97ja/dockermulti:latest'
+                sh 'sudo docker pull te97ja/dockermulti:latest'
+                sh 'sudo docker run -d te97ja/dockermulti:latest'
                 
             }
         }
