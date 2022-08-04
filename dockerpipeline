@@ -10,7 +10,7 @@ agent { label 'docker' }
         }
         stage('docker login') {
             steps {
-                sh 'sudo docker login --username=te97ja --password=Teja@1997'
+                sh 'sudo docker login --username=te97ja --password=''
             }
         }
       stage('publish') {
