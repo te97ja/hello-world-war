@@ -10,6 +10,7 @@ agent { label 'docker' }
         }
       stage('publish') {
             steps {
+                sh 'docker login --username=te97ja --password=Teja@1997'
                 sh 'sudo docker tag dockermultistage:latest te97ja/dockermulti:latest'
                 sh 'sudo docker push te97ja/dockermulti:latest'
             }
