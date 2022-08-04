@@ -5,7 +5,7 @@ pipeline {
           steps {
           echo "starting ..."
           sh 'cd /home/ubuntu/multi'
-          s 'git clone https://github.com/te97ja/hello-world-war.git'
+          sh 'git clone https://github.com/te97ja/hello-world-war.git'
           }
       }
       
