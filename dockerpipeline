@@ -19,10 +19,16 @@ agent { label 'docker' }
                 sh 'sudo docker push te97ja/dockermulti:latest'
             }
         }
-      stage('deploy') {
+      stage('docker pull') {
             steps {
                 sh 'sudo docker pull te97ja/dockermulti:latest'
                 sh 'sudo docker run -d -p 9990:8080 te97ja/dockermulti:latest'
+                
+            }
+        }
+              stage('deploy') {
+            steps {
+                sh 'sudo docker run -d -p 9995:8080 te97ja/dockermulti:latest'
                 
             }
         }
