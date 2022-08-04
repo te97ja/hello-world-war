@@ -4,7 +4,7 @@ pipeline {
       stage ('git pull') {
           steps {
           echo "starting ..."
-          sh 'cd /home/ubuntu/multi'
+          sh 'cd /home/ubuntu/multi/'
           sh 'git clone https://github.com/te97ja/hello-world-war.git'
           }
       }
