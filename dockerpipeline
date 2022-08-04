@@ -1,20 +1,29 @@
 pipeline {
   agent any
     stages {
+      stage ('git pull') {
+          steps {
+          cd /home/ubuntu/multi
+          git clone https://github.com/te97ja/hello-world-war.git
+          }
+      }
+      
       stage('docker build') {
             steps {
-                cd /home/ubuntu/multi
-                docker build -t multistage .
+                cd /home/ubuntu/multi/hello-world-war
+                docker build -t dockermultistage .
             }
         }
       stage('publish') {
             steps {
-                docker tag 
+                docker tag dockermultistage:latest te97ja/dockermulti:latest
+                docker push te97ja/dockermulti:latest
             }
         }
       stage('deploy') {
             steps {
-                
+                docker pull te97ja/dockermulti:latest
+                docker run -d te97ja/dockermulti:latest
                 
             }
         }
