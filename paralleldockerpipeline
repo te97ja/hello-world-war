@@ -1,0 +1,60 @@
+pipeline {
+agent none
+stages {
+      
+      stage('docker build') {
+       agent {
+               label "docker"
+                    }
+            steps {
+                sh 'cd /home/slave/multi/hello-world-war'
+                sh 'sudo docker build -t dockermultistage .'
+            }
+        }
+        stage('docker login') {
+        agent {
+               label "docker"
+                    }
+            steps {
+                sh 'sudo docker login --username=te97ja --password=''
+            }
+        }
+      stage('publish') {
+      agent {
+               label "docker"
+                    }
+            steps {
+                sh 'sudo docker tag dockermultistage:latest te97ja/dockermulti:latest'
+                sh 'sudo docker push te97ja/dockermulti:latest'
+            }
+        }
+      stage('docker pull') {
+      agent {
+               label "docker"
+                    }
+            steps {
+                sh 'sudo docker pull te97ja/dockermulti:latest'                
+            }
+        }
+        parallel {
+              stage('deploy on docker node') {
+               agent {
+                        label "docker"
+                    }
+            steps {
+                sh 'sudo docker run -d -p 9995:8080 te97ja/dockermulti:latest'
+                
+            }
+        }
+              stage('deploy on jenkins node') {
+               agent {
+                        label "jenkins"
+                    }
+            steps {
+                sh 'sudo docker run -d -p 9995:8080 te97ja/dockermulti:latest'
+                
+            }
+        }
+        }
+    }
+}
