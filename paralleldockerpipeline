@@ -16,7 +16,7 @@ stages {
                label "docker"
                     }
             steps {
-                sh 'sudo docker login --username=te97ja --password='Teja@1997'
+                sh 'sudo docker login --username=te97ja --password=Teja@1997
             }
         }
       stage('publish') {
