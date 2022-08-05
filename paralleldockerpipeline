@@ -15,10 +15,9 @@ stages {
         agent {
                label "docker"
                     }
-        withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'pass', usernameVariable: 'user')]) {
             steps {
+                    withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'pass', usernameVariable: 'user')])
                   sh 'sudo docker login --username=$user --password=$pass'
-            }
             }
         }
       stage('publish') {
