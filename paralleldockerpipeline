@@ -1,5 +1,8 @@
 pipeline {
 agent none
+environment {
+		DOCKERHUB_CREDENTIALS=credentials('docker_creds')
+	}
 stages {
       
       stage('docker build') {
@@ -16,8 +19,7 @@ stages {
                label "docker"
                     }
             steps {
-                    withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'pass', usernameVariable: 'user')])
-                  sh 'sudo docker login --username=$user --password=$pass'
+                  sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
       stage('publish') {
