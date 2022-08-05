@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - '8090:8080'
+      - '50001:50000'
+    depends_on:
+      - tomcat
+  tomcat:
+    image: "tomcat:9.0"
+    ports:
+      - '9090:8080'
+    depends_on:
+      - mysql
+      - postgresql
+  mysql:
+    image: "mysql:latest"
+    ports:
+      - '9990:8080'
+  postgresql:
+    image: "postgres:latest"
+    ports:
+      - '9099:8080'
