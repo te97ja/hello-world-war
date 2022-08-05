@@ -16,7 +16,8 @@ stages {
                label "docker"
                     }
             steps {
-                sh 'sudo docker login --username=te97ja --password=boo-yah'
+                withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'password', usernameVariable: 'username')])
+                sh 'sudo docker login --username=$username --password=$password'
             }
         }
       stage('publish') {
