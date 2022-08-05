@@ -1,19 +1,19 @@
 pipeline {
 agent any
     stages {
-      
+       stage('docker login') {
+            steps {
+            withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'password', usernameVariable: 'username')])
+                sh 'sudo docker login --username=$username --password=$password'
+            }
+        }
       stage('docker build') {
             steps {
                 sh 'cd /home/slave/multi/hello-world-war'
                 sh 'sudo docker build -t dockermultistage .'
             }
         }
-        stage('docker login') {
-            steps {
-            withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'password', usernameVariable: 'username')])
-                sh 'sudo docker login --username=$username --password=$password'
-            }
-        }
+       
       stage('publish') {
             steps {
                 sh 'sudo docker tag dockermultistage:latest te97ja/dockermulti:latest'
