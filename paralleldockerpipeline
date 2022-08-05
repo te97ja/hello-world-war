@@ -17,7 +17,7 @@ stages {
                     }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'password', usernameVariable: 'username')])
-                sh 'sudo docker login --username=$username --password=$password'
+                sh 'sudo docker login --username="$username" --password="$password"'
             }
         }
       stage('publish') {
