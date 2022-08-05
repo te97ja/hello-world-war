@@ -1,5 +1,5 @@
 pipeline {
-agent { label 'docker' }
+agent any
     stages {
       
       stage('docker build') {
@@ -10,7 +10,8 @@ agent { label 'docker' }
         }
         stage('docker login') {
             steps {
-                sh 'sudo docker login --username=te97ja --password=''
+            withCredentials([usernamePassword(credentialsId: 'docker_creds', passwordVariable: 'password', usernameVariable: 'username')])
+                sh 'sudo docker login --username=$username --password=$password'
             }
         }
       stage('publish') {
