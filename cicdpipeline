@@ -1,0 +1,32 @@
+pipeline{
+	agent {label 'build'}
+   
+      stages{
+     	 stage('Checkout external project') {
+             steps {
+		sh "rm -rf hello-world-war"
+            	sh "git clone https://github.com/te97ja/hello-world-war1.git"
+            	sh "ls -lat"
+            	sh "pwd"
+       	     }
+          }
+       	  stage('build'){
+              steps{
+                 dir('hello-world-war') {
+		    sh "pwd"
+	            sh "ls"
+                    sh "echo ${BUILD_NUMBER}"
+                    sh "sudo docker build -t poovikas/tomcat:${BUILD_NUMBER} ."
+         	 }
+              }
+          }
+          stage('publish') {
+              steps {
+                 sh 'sudo docker login --username=poovikas --password=Pooja@0108'
+                 sh "sudo docker push poovikas/tomcat:${BUILD_NUMBER}"
+		
+              }
+         }
+ 
+       }
+    }
